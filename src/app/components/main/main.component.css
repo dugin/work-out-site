@@ -1,0 +1,99 @@
+.bg-container {
+  background: url('../assets/img/sport-bg.jpg') no-repeat center center;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+}
+
+.layer {
+  background: radial-gradient(rgba(244, 67, 54, .6), rgba(244, 67, 54, .4),rgba(244, 67, 54, .3),rgba(244, 67, 54, .2)); 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 70px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo {
+  margin-left: 20px;
+  opacity: .7;
+  position: relative;
+}
+
+.headerDivider {
+
+  border-right: 1px solid white;
+  height: 35px;
+  position: relative;
+  padding: 0 10px;
+}
+
+ul {
+  z-index: 1;
+  display: inline-flex;
+  margin-left: 10px;
+}
+
+.menu-item {
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+  margin-left: 20px;
+}
+
+.title-container{
+   
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.title{
+     font-size: 70px;
+    font-weight: 300;
+    padding: 30px 40px;
+     border: 8px solid white;
+     color: white;
+}
+
+.sub-title{
+
+      font-size: 26px;
+    font-weight: 300;
+    color: white;
+
+}
+
+@media screen and (max-width: 569px) {
+
+    .title{
+     font-size: 40px;
+    font-weight: 300;
+    padding: 20px 30px;
+     border: 6px solid white;
+     color: white;
+}
+
+.sub-title{
+
+      font-size: 22px;
+    font-weight: 300;
+    color: white;
+
+}
+
+
+}

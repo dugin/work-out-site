@@ -14,7 +14,7 @@ export class MaskUtil {
     }
 
      public static getTime(){
-        return [ /[1-9]/, /\d/, 'h', /\d/,/\d/]
+        return [ /\d/, /\d/, 'h', /\d/,/\d/]
 
     }
 }

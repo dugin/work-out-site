@@ -1,4 +1,4 @@
-<!-- navBar-->
+ <!-- navBar-->
 <nav>
   <div class="nav-wrapper md-elevation-z6">
     <span class="brand-logo "> Work Out</span>
@@ -11,13 +11,12 @@
 <div class="container">
   <!-- form-->
   <h5 class="title" style="padding: 10px 0"> // Informações Gerais</h5>
-
   <!-- row1-->
   <div class="row">
     <form class="col l12 m12 s12  form">
-      <div class="row input-container  valign-wrapper">
-        <div style="padding: 0;" class="valign left logo input-field col    s4 m2 l2  offset-m1 offset-l1">
-          <img class="img-logo" [src]="!logoPath? 'assets/img/no-image.png' : logoPath" height="100px" width="100px">
+      <div class="row input-container">
+        <div style="padding: 0;" class="logo input-field col    s4 m4 l4  ">
+          <img class="circle responsive-img img-logo" [src]="!logoPath? 'assets/img/no-image.png' : logoPath" height="100px" width="100px">
         </div>
         <div class="input-field col l8 m8 s8">
           <i class="material-icons prefix">business</i>
@@ -27,18 +26,18 @@
       </div>
       <!-- row2-->
       <div class="row">
-        <div class="input-field valign-wrapper col l3 m3 s4 offset-l1 offset-m1 ">
-          <input (change)="getLogo($event)" type="file" name="file-2[]" id="file-2" class="inputfile valign center img-logo inputfile-2" 
+        <div class="input-field col l4 m4 s4  ">
+          <input (change)="getLogo($event)" type="file" name="file-2[]" id="file-2" class="inputfile valign center img-logo inputfile-2"
             multiple />
-          <label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 ,1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span class="file-text"  >LOGO...</span></label>
+          <label class="upload" for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 ,1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span class="file-text"  >LOGO...</span></label>
         </div>
-        <div class="input-field col l8 m8 s8">
+        <div class="input-field col l8 m8 s8 ">
           <i class="material-icons prefix">account_balance_wallet</i>
           <input [textMask]="{mask: CNPJmask}" [(ngModel)]="corporate.cnpj" name="cnpj" id="cnpj" type="text">
           <label for="cnpj">CNPJ</label>
         </div>
       </div>
-       <!-- row2-->
+      <!-- row2-->
       <div class="row">
         <div class="input-field  col l8 m8 s8 offset-l4 offset-m4  offset-s4 ">
           <i class="material-icons prefix">people</i>
@@ -49,145 +48,163 @@
       <!-- row3-->
       <div class="row" style="margin: 0">
         <div class="input-field  col l12 m12 s12 ">
-          <img [src]="!bannerPath? 'assets/img/no-banner.jpg' : bannerPath" width="100%">
+          <img class="responsive-img" [src]="!bannerPath? 'assets/img/no-banner.jpg' : bannerPath" width="100%">
         </div>
       </div>
-      <div class="row  input-file-container ">
-        <div class="input-field  col l12 m12 s12  offset-l5 offset-m5 offset-s2">
-          <input  (change)="getBanner($event)" type="file" name="file-3[]" id="file-3" class="inputfile inputfile-2" data-multiple-caption="{count} files selected"
+      <div class="row  input-file-container">
+        <div class="input-field  col l12 m12 s12">
+          <input (change)="getBanner($event)" type="file" name="file-3[]" id="file-3" class="inputfile inputfile-2" data-multiple-caption="{count} files selected"
             multiple />
-          <label for="file-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 ,1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span class="file-text">BANNER...</span></label>
+          <label class="upload" for="file-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 ,1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span class="file-text">BANNER...</span></label>
         </div>
       </div>
       <!-- end-->
       <div class="row title-row">
-      <h5  class="title"> // Endereço</h5>
+        <h5 class="title"> // Endereço</h5>
       </div>
-  
-    <div class="row">
-      <div class="input-field  col l4 m4  s10 ">
-        <i class="material-icons prefix">local_post_office</i>
-        <input [textMask]="{mask: CEPmask}" [(ngModel)]="corporate.cep" name="cep" [ngModelOptions]="{standalone: true}" (ngModelChange)="onCEPChange($event)"
-          id="cep" type="text">
-        <label for="cep">CEP</label>
-      </div>
-      <!-- loader -->
-      <div *ngIf="showCepLoading" class="input-field  col l2 m2  s2 ">
-        <div class="preloader-wrapper small active">
-          <div class="spinner-layer spinner-red-only">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-              <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-              <div class="circle"></div>
+      <div class="row">
+        <div class="input-field  col l4 m4  s10 ">
+          <i class="material-icons prefix">local_post_office</i>
+          <input [textMask]="{mask: CEPmask}" [(ngModel)]="corporate.cep" name="cep" [ngModelOptions]="{standalone: true}" (ngModelChange)="onCEPChange($event)"
+            id="cep" type="text">
+            <label for="cep">CEP</label>
+        </div>
+        <!-- loader -->
+        <div *ngIf="showCepLoading" class="input-field  col l2 m2  s2 ">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div materialize class="row">
-      <div class="input-field  col l8 m6  s10 ">
-        <i class="material-icons prefix">location_on</i>
-        <input [focus]="focusFields[0]" [(ngModel)]="corporate.address.street" name="street" id="street" type="text">
-        <label for="street">Endereço</label>
-      </div>
-      <div class="input-field  col l1 m2  s2 ">
-        <input [(ngModel)]="corporate.address.number" name="number" id="number" type="text">
-        <label [focus]="focusFields[5]" for="number">Nº</label>
-      </div>
-      <div class="input-field  col l3 m4  s12 ">
-        <input [(ngModel)]="corporate.address.complement" name="complement" id="complement" type="text">
-        <label for="complement">Complemento</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field  col l4 m5  s10 ">
-        <input [focus]="focusFields[1]" [(ngModel)]="corporate.address.neighbor" name="neighbor" id="neighbor" type="text">
-        <label for="neighbor">Bairro</label>
-      </div>
-      <div class="input-field  col l1 m1  s2 ">
-        <input [focus]="focusFields[2]" [(ngModel)]="corporate.address.state" name="state" id="state" type="text">
-        <label for="state">Estado</label>
-      </div>
-      <div class="input-field  col l4 m4  s6 ">
-        <input [focus]="focusFields[3]" [(ngModel)]="corporate.address.city" name="city" id="city" type="text">
-        <label for="city">Cidade</label>
-      </div>
-      <div class="input-field  col l3 m2  s6 ">
-        <input [focus]="focusFields[4]" [(ngModel)]="corporate.address.country" name="country" id="country" type="text">
-        <label for="country">País</label>
-      </div>
-    </div>
-  
-    <div class="row title-row">
-      <div class="col l4 m4  s8 ">
-        <h5 class="title"> // Departamentos</h5>
-      </div>
-      <div class="col l2 m2  s2 ">
-        <a (click)="this.corporate.departaments.push('');"  class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-    </div>
-   
-    <div class="row">
-      <div *ngFor="let dpt of corporate.departaments; let i = index" class="input-field  col l3 m4  s6 ">
-        <i class="material-icons prefix">dashboard</i>
-        <input name="departaments" id="dpt{{i}}" type="text">
-        <label for="dpt{{i}}">Departamento</label>
-      </div>
-    </div>
-    
-    <div class="row title-row">
-      <div class="col l4 m4  s8 ">
-        <h5 class="title"> // Admins</h5>
-      </div>
-      <div class="col l2 m2  s2 ">
-        <a (click)="this.corporate.admins.push('');"  class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-    </div>
-  
-    <div class="row">
-      <div *ngFor="let adm of corporate.admins; let i = index" class="input-field  col l4 m4  s6 ">
-        <i class="material-icons prefix">email</i>
-        <input name="admins" id="admin{{i}}" type="text">
-        <label for="admin{{i}}">Email</label>
-      </div>
-    </div>
-    
-     <div class="row title-row">
-    <h5 class="title"> // Horários</h5>
-     </div>
-  
-    <div *ngFor="let sch of corporate.schedule; let i = index">
-    <div class="row" >
-      <div class="col l2 m2  s4 ">
-        <p class="weekDay"> {{sch.weekDay}}</p>
-      </div>
-      <div class="col l2 m2  s2 ">
-        <a (click)="sch.time.push('');" style="margin-top: 10px;" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
-      </div>
-      </div>
-      <div class="row" *ngFor="let time of sch.time; let j = index">
-        <div class="input-field  col l6 m6  s6 ">
-          <i class="material-icons prefix">schedule</i>
-          <input [textMask]="{mask: Timemask}"  name="ini" id="ini{{i}}{{j}}" type="text">
-          <label for="ini{{i}}{{j}}">Início</label>
+      <div class="row">
+        <div class="input-field  col l8 m6  s10 ">
+          <i class="material-icons prefix">location_on</i>
+          <input [focus]="focusFields[0]" [(ngModel)]="corporate.address.street" name="street" id="street" type="text">
+          <label for="street">Endereço</label>
         </div>
-        <div class="input-field  col l6 m6  s6 ">
-          <i class="material-icons prefix">schedule</i>
-          <input [textMask]="{mask: Timemask}"  name="fim" id="fim{{i}}{{j}}" type="text">
-          <label for="fim{{i}}{{j}}">Término</label>
+        <div class="input-field  col l1 m2  s2 ">
+          <input [(ngModel)]="corporate.address.number" name="number" id="number" type="text">
+          <label [focus]="focusFields[5]" for="number">Nº</label>
+        </div>
+        <div class="input-field  col l3 m4  s12 ">
+          <input [(ngModel)]="corporate.address.complement" name="complement" id="complement" type="text">
+          <label for="complement">Complemento</label>
         </div>
       </div>
-    </div>
-
-    <div class="row title-row" style="margin-top: 25px; margin-bottom: 0">
-    <button  class="btn waves-effect waves-light red" type="submit" name="action">Enviar
+      <div class="row">
+        <div class="input-field  col l4 m5  s10 ">
+          <input [focus]="focusFields[1]" [(ngModel)]="corporate.address.neighbor" name="neighbor" id="neighbor" type="text">
+          <label for="neighbor">Bairro</label>
+        </div>
+        <div class="input-field  col l1 m1  s2 ">
+          <input [focus]="focusFields[2]" [(ngModel)]="corporate.address.state" name="state" id="state" type="text">
+          <label for="state">Estado</label>
+        </div>
+        <div class="input-field  col l4 m4  s6 ">
+          <input [focus]="focusFields[3]" [(ngModel)]="corporate.address.city" name="city" id="city" type="text">
+          <label for="city">Cidade</label>
+        </div>
+        <div class="input-field  col l3 m2  s6 ">
+          <input [focus]="focusFields[4]" [(ngModel)]="corporate.address.country" name="country" id="country" type="text">
+          <label for="country">País</label>
+        </div>
+      </div>
+      <div class="row title-row">
+        <div class="col l4 m4  s8 ">
+          <h5 class="title"> // Departamentos</h5>
+        </div>
+        <div class="col l2 m2  s2 ">
+          <a (click)="this.corporate.departaments.push('');" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let dpt of corporate.departaments; let i = index" class="input-field  col l3 m4  s6 ">
+          <i class="material-icons prefix">dashboard</i>
+          <input name="departaments" id="dpt{{i}}" type="text">
+          <label for="dpt{{i}}">Departamento</label>
+        </div>
+      </div>
+      <div class="row title-row">
+        <div class="col l4 m4  s8 ">
+          <h5 class="title"> // Admins</h5>
+        </div>
+        <div class="col l2 m2  s2 ">
+          <a (click)="this.corporate.admins.push('');" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngFor="let adm of corporate.admins; let i = index" class="input-field  col l4 m4  s6 ">
+          <i class="material-icons prefix">email</i>
+          <input name="admins" id="admin{{i}}" type="text">
+          <label for="admin{{i}}">Email</label>
+        </div>
+      </div>
+      <div class="row title-row">
+        <h5 class="title"> // Esportes</h5>
+      </div>
+      <div class="row">
+        <div class="col l12 m12  s12 ">
+          <p class="weekDay"> Gostaria de pré-selecionar os esportes que estarão disponíveis para os funcionários? </p>
+          <span>
+           
+      <input [(ngModel)]="isSportsSelected" [value]="true" class="red" name="group1" type="radio" id="test1" />
+      <label  for="test1">Sim</label>
+ 
+            </span>
+          <span>
+      <input [(ngModel)]="isSportsSelected" [value]="false"  class="red" name="group1" type="radio" id="test2" />
+      <label  for="test2">Não</label>
+    </span>
+        </div>
+      </div>
+      <div class="row" *ngIf="isSportsSelected && sports">
+        <div class="input-field col s12">
+          <span *ngFor="let sport of sports, let i = index">
+      <input type="checkbox" id="sport{{i}}" />
+      <label class="sport-checkbox"  for="sport{{i}}">{{sport.name}}</label>
+    </span>
+        </div>
+      </div>
+      <div class="row title-row">
+        <h5 class="title"> // Horários</h5>
+      </div>
+      <div *ngFor="let sch of corporate.schedule; let i = index">
+        <div class="row">
+          <div class="col l2 m2  s4 ">
+            <p class="weekDay"> {{sch.weekDay}}</p>
+          </div>
+          <div class="col l2 m2  s2 ">
+            <a (click)="sch.time.push('');" style="margin-top: 10px;" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+        </div>
+        <div class="row" *ngFor="let time of sch.time; let j = index">
+          <div class="input-field  col l6 m6  s6 ">
+            <i class="material-icons prefix">schedule</i>
+            <input [textMask]="{mask: Timemask}" name="ini" id="ini{{i}}{{j}}" type="text">
+            <label for="ini{{i}}{{j}}">Início</label>
+          </div>
+          <div class="input-field  col l6 m6  s6 ">
+            <i class="material-icons prefix">schedule</i>
+            <input [textMask]="{mask: Timemask}" name="fim" id="fim{{i}}{{j}}" type="text">
+            <label for="fim{{i}}{{j}}">Término</label>
+          </div>
+        </div>
+      </div>
+      <div class="row title-row" style="margin-top: 25px; margin-bottom: 0">
+        <button class="btn waves-effect waves-light red" type="submit" name="action">Enviar
     <i class="material-icons right">send</i>
   </button>
-</div>
-  </form>
+      </div>
+    </form>
   </div>
 </div>

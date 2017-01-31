@@ -1,3 +1,4 @@
+import { FirebaseService } from './../../services/firebase.service';
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { MaskUtil } from '../../util/mask.util';
@@ -6,12 +7,13 @@ import { CorporateModel } from '../../model/corporate';
 import { AddressModel } from '../../model/address';
 import { WeekModel } from '../../model/time';
 import { TimeModel } from '../../model/time';
+
 declare var Materialize: any;
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
 
@@ -23,22 +25,37 @@ export class RegisterComponent implements OnInit {
   logoPath: string;
   bannerPath: string;
   corporate: CorporateModel;
+  isSportsSelected: boolean;
+
+  sports;
 
   showCepLoading: boolean;
   focusFields = new Array<boolean>(6);
 
   constructor(
     public registerService: RegisterService,
-    public cepService: CepService
+    public cepService: CepService,
+    public firebaseService: FirebaseService
   ) { }
 
   ngOnInit() {
 
     this.initializeObj();
+
+    this.firebaseService.sports.subscribe((arr) => {
+      this.sports = arr;
+    })
+
+
+  }
+  change(event) {
+    console.log(event);
+
+
   }
 
-
   initializeObj() {
+
 
     this.corporate = new CorporateModel('', '', null, '', '', new AddressModel('', '', null, '', '', '', '', ''), new Array<string>(), new Array<string>(), new Array<WeekModel>());
     this.focusFields = this.focusFields.fill(false);
@@ -59,28 +76,29 @@ export class RegisterComponent implements OnInit {
 
   getLogo(event) {
 
+    this.getFile(event, true)
+
+  }
+
+  getFile(event, isLogoPath: boolean) {
 
     let reader = new FileReader();
 
     reader.onload = (e: any) => {
 
-      this.logoPath = e.target.result;
+      if (isLogoPath)
+        this.logoPath = e.target.result;
+      else
+        this.bannerPath = e.target.result;
     };
 
     reader.readAsDataURL(event.srcElement.files[0]);
-
 
   }
 
   getBanner(event) {
-    let reader = new FileReader();
 
-    reader.onload = (e: any) => {
-
-      this.bannerPath = e.target.result;
-    };
-
-    reader.readAsDataURL(event.srcElement.files[0]);
+    this.getFile(event, false)
 
   }
 

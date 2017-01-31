@@ -1,0 +1,92 @@
+<!-- pie chart card-->
+<div class="col s12 m7">
+  <div class="card bg">
+    <!-- pie toolbar-->
+    <div class="row card-title center-align">
+      <span class="white-text">Dados dos Funcionários</span>
+      <a style="float: right" class="btn-flat card-title activator"><i class="material-icons ">settings</i></a>
+    </div>
+    <!-- end of pie toolbar-->
+    <!-- pie content-->
+    <div class="card-content">
+      <div class="row valign-wrapper">
+        <div class="col l12" style="width: 100%">
+          <canvas baseChart height="350" [data]="pieChartData" [labels]="pieChartLabels" [colors]="pieChartColors" [chartType]="pieChartType"
+            [options]="chartOptions"></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- end of pie content-->
+    <!-- pie filter-->
+    <div class="card-reveal">
+      <span class="card-title filter-title grey-text text-darken-4">Filtro<i class="material-icons right">close</i></span>
+      <div class="divider"> </div>
+      <div class="filter-container">
+        <div class="row">
+          <div class="col l12 m12  s12 ">
+            <p class="filter-topic">Departamento </p>
+            <select [(ngModel)]="filter.departament" materialize="material_select">
+                        <option value="TODOS" selected>Todos</option>
+                        <option   value="RH">RH</option>
+                        <option  value="TI">TI</option>
+                        <option  value="FINANCEIRO">FINANCEIRO</option>
+                  </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 m12  s12 ">
+            <p class="filter-topic">Sexo </p>
+            <span>
+           
+      <input name="genderSelect" type="radio"  value="masculine"   [(ngModel)]="filter.gender" class="red"  id="masculine" />
+      <label  for="masculine">Masculino</label>
+ 
+            </span>
+            <span>
+      <input name="genderSelect" type="radio" value="feminine"  [(ngModel)]="filter.gender"  class="red"  id="feminine" />
+      <label  for="feminine">Feminino</label>
+ </span>
+            <span>
+        <input name="genderSelect" type="radio"  value="both" [(ngModel)]="filter.gender"  class="red"  id="both" />
+      <label  for="both">Ambos</label>
+    </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 m12  s12 ">
+            <p class="filter-topic">IMC </p>
+            <span>
+           
+      <input [(ngModel)]="filter.IMC" value="under"  class="red" name="imc" type="radio" id="under" />
+      <label  for="under">Abaixo da média</label>
+ 
+            </span>
+            <span>
+      <input [(ngModel)]="filter.IMC" value="average"  class="red" name="imc" type="radio" id="average" />
+      <label  for="average">Média</label>
+        <input [(ngModel)]="filter.IMC" value="above"   class="red" name="imc" type="radio" id="above" />
+      <label  for="above">Acima da média</label>
+    </span>
+            <span>
+      <input [(ngModel)]="filter.IMC" value="all"   class="red" name="imc" type="radio" id="all" />
+      <label  for="all">Tudo</label>
+    </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 m12  s12 ">
+            <p class="filter-topic">Idade </p>
+            <nouislider [connect]="true" [min]="18" [max]="90" [step]="1" [(ngModel)]="filter.ageRange" [tooltips]="[ true, true ]" style="margin-top: 4em; padding: 0 15px"></nouislider>
+          </div>
+        </div>
+        <div class="row btn-save-filter">
+          <div class="col l12 m12  s12 ">
+            <a class="waves-effect waves-light red btn card-title" style="padding: 0 15px; font-size:18px;" (click)="onApply()">Aplicar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end of pie filter-->
+  </div>
+</div>
+<!--end of pie chart card-->

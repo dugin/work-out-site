@@ -1,0 +1,24 @@
+ <div class=" col s12 m12 ">
+    <div class="card container-chart">
+      <div class="row card-title">
+        <div class="col l12 center-align">
+          <span class="white-text">Inteligência dos Cadastrados</span>
+        </div>
+      </div>
+        <div style=" padding-left: 10px; margin-left: -15px;" class="card-content">
+        <div class="row valign-wrapper">
+          <div class="col l12"  style="width: 100%">
+            
+            <canvas baseChart  height="300"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="chartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+               ></canvas> 
+                </div>
+            </div>
+      </div>
+        </div>
+      </div>

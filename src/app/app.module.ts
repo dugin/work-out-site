@@ -6,8 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { MaterializeModule } from 'angular2-materialize';
 import { TextMaskModule } from 'angular2-text-mask';
-
-
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { NouisliderModule } from 'ng2-nouislider';
 //routes
 import { routing } from './app.routing'
 
@@ -20,11 +20,18 @@ import { CepService } from './services/cep.service';
 // component
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
-
-import 'hammerjs';
 import { FocusDirective } from './directives/focus.directive';
 import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
+import { AdminComponent } from './components/admin/admin.component';
 
+// chart component
+import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
+
+import 'hammerjs';
+import "Chart.js";
 
 // Must export the config
 export const firebaseConfig = {
@@ -40,7 +47,12 @@ export const firebaseConfig = {
     AppComponent,
     RegisterComponent,
     FocusDirective,
-    LoginComponent
+    LoginComponent,
+    MainComponent,
+    AdminRegisterComponent,
+    AdminComponent,
+    PieChartComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +61,9 @@ export const firebaseConfig = {
     routing,
     AngularFireModule.initializeApp(firebaseConfig),
     TextMaskModule,
-    MaterializeModule
+    MaterializeModule,
+    ChartsModule,
+    NouisliderModule
 
   ],
   providers: [RegisterService, FirebaseService, CepService],

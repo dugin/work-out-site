@@ -1,2 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "../node_modules/materialize-css/dist/css/materialize.css";
+@import "~nouislider/distribute/nouislider.min.css";
+html,
+body {
+  height: 100%;
+  background-color: #f2f2f2;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.md-elevation-z6 {
+  z-index: 1;
+  background-color: rgb(244, 67, 54);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12)
+}
+
+.brand-logo {
+  margin-left: 10px;
+}
+
+
+/* label focus color */
+
+.input-field input[type]:focus+label {
+  color: rgb(244, 67, 54);
+}
+
+
+/* label underline focus color */
+
+.input-field input[type]:focus {
+  border-bottom: 1px solid rgb(244, 67, 54);
+  box-shadow: 0 1px 0 0 rgb(244, 67, 54);
+}
+
+
+/* icon prefix focus color */
+
+.input-field .prefix.active {
+  color: rgb(244, 67, 54);
+}
+
+[type="radio"]:checked+label:after,
+[type="radio"].with-gap:checked+label:after {
+  background-color: rgb(244, 67, 54);
+  border: 2px solid rgb(244, 67, 54);
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+  color: rgb(244, 67, 54);
+}
+
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid rgb(244, 67, 54);
+  border-bottom: 2px solid rgb(244, 67, 54);
+}
+
+.noUi-connect{
+    background: rgb(244, 67, 54) ;
+}

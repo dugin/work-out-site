@@ -1,0 +1,53 @@
+.card-title {
+  padding: 15px;
+  background: rgb(244, 67, 54);
+  margin-bottom: 0;
+}
+
+.card-reveal {
+  padding-top: 5px;
+  background-color: white;
+  text-align: center;
+}
+
+.filter-title {
+  background-color: white;
+  font-size: 26px;
+}
+
+.filter-topic {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.name {
+  font-size: 16px;
+}
+
+.timestamp {
+  margin-top: 5px !important;
+  ;
+  color: rgba(0, 0, 0, .5) !important;
+  font-size: 13px;
+}
+
+.confirm-btn {
+  margin-bottom: 5px;
+}
+
+.btn-flat,
+.btn-flat i {
+  color: white;
+  padding: 0;
+  font-size: 1.6rem;
+}
+
+.filter-container {
+  padding: 15px 15px 0 15px;
+  text-align: left;
+  margin-bottom: -15px;
+}
+
+.btn-save-filter {
+  margin-top: 30px;
+}
