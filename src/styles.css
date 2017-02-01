@@ -7,7 +7,27 @@ body {
   height: 100%;
   background-color: #f2f2f2;
   font-family: 'Montserrat', sans-serif;
+ 
 }
+
+
+
+ /* datePicker */
+.picker__date-display{
+  background-color: rgb(244, 67, 54);
+}
+
+.picker__weekday-display{
+   background-color:#aa2e25;
+}
+.picker__close, .picker__today{
+  color: rgb(244, 67, 54);
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+   background-color: rgb(244, 67, 54);
+}
+ /* end of datePicker */
+
 
 .md-elevation-z6 {
   z-index: 1;
@@ -56,7 +76,14 @@ body {
   border-right: 2px solid rgb(244, 67, 54);
   border-bottom: 2px solid rgb(244, 67, 54);
 }
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]){
+   border-bottom: 1px solid rgb(244, 67, 54);
+  box-shadow: 0 1px 0 0 rgb(244, 67, 54);
+}
+input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) + label{
+  color: rgb(244, 67, 54);
+}
 
-.noUi-connect{
-    background: rgb(244, 67, 54) ;
+.noUi-connect {
+  background: rgb(244, 67, 54);
 }

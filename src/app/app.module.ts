@@ -26,12 +26,18 @@ import { MainComponent } from './components/main/main.component';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 import { AdminComponent } from './components/admin/admin.component';
 
+
+// shared components
 // chart component
-import { PieChartComponent } from './components/charts/pie-chart/pie-chart.component';
-import { LineChartComponent } from './components/charts/line-chart/line-chart.component';
+import { PieChartComponent } from './components/shared/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './components/shared/charts/line-chart/line-chart.component';
+import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
+import { EventsComponent } from './components/shared/events/events.component';
+
 
 import 'hammerjs';
 import "Chart.js";
+
 
 // Must export the config
 export const firebaseConfig = {
@@ -52,7 +58,9 @@ export const firebaseConfig = {
     AdminRegisterComponent,
     AdminComponent,
     PieChartComponent,
-    LineChartComponent
+    LineChartComponent,
+    SideNavComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

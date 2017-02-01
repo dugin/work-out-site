@@ -1,0 +1,74 @@
+
+
+.card{
+  min-height: 600px;
+}
+.card-title {
+  padding: 15px;
+  background: rgb(244, 67, 54);
+  margin-bottom: 0;
+}
+.card-reveal {
+  padding-top: 5px;
+  background-color: white;
+  text-align: center;
+}
+
+.filter-title {
+  background-color: white;
+  font-size: 26px;
+}
+
+.filter-topic {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-flat,
+.btn-flat i {
+  color: white;
+  padding: 0;
+  font-size: 1.6rem;
+}
+
+.filter-container {
+  padding: 15px 15px 0 15px;
+  text-align: left;
+  margin-bottom: -15px;
+}
+
+.btn-save-filter {
+  margin-top: 30px;
+}
+
+.event-title{
+  margin-left: 3px;
+font-size: 14px;
+}
+.event-content{
+ font-size: 14px;
+   font-weight: 300;
+}
+
+.cancel-event{
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.add-btn{
+   padding: 0 !important;
+  position: absolute;
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+[type="checkbox"] + label{
+  padding-left: 23px;
+  padding-right: 15px;
+}
+
+.btn-create{
+  margin-top: 20px;
+  width: 50%;
+}

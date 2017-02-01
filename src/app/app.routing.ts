@@ -14,7 +14,7 @@ const APP_ROUTES: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register/admin', component: AdminRegisterComponent },
     { path: 'admin', component: AdminComponent },
-    { path: '', redirectTo: 'main', pathMatch: 'full' },
+    { path: '', redirectTo: 'admin', pathMatch: 'full' },
     { path: '**', component: AdminRegisterComponent },
 
 

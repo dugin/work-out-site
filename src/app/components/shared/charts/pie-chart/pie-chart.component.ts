@@ -1,4 +1,4 @@
-import { PieChartFilterModel } from './../../../model/pie-chart-filter';
+import { PieChartFilterModel } from './../../../../model/pie-chart-filter';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

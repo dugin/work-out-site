@@ -1,0 +1,188 @@
+<div class="col s12 m10 offset-m1">
+    <div class="card">
+      <div class="row card-title">
+        <div class="col l12 center-align">
+          <span class="white-text">Eventos</span>
+        </div>
+      </div>
+      <div style=" padding-left: 10px " class="card-content">
+        <div class="row valign-wrapper">
+          <div style="margin-left: 10px; padding-left: 0; text-align: center" class="col l2 m2 s2">
+            <img src="https://firebasestorage.googleapis.com/v0/b/work-out-348f6.appspot.com/o/sports%2Ficon%2Ffutebol.png?alt=media&token=2d24a7a6-3f2f-44ae-95c4-3f42c7702596"
+              alt="" class="responsive-img">
+             <p  class="event-content truncate"> Futebol </p>
+          </div>
+          <div class="col l7 m7 s7 left-align">
+           <p class="event-content"><b class="event-title">NOME: </b>&nbsp; Futebol de TI </p> 
+            <p class="event-content"><b class="event-title">LOCAL: </b>&nbsp;  Rua das Laranjeiras, 200 - Laranjeiras</p> 
+           <p class="event-content"><b class="event-title"> DATA: </b>&nbsp; 10/02/2016 - 19h00 </p> 
+            <p class="event-content"><b class="event-title"> CONFIRMADOS:  </b>&nbsp; 23 </p>
+          </div>
+          <div class="col l3 m3 s3" style="float:right; text-align: center">
+            <a class="confirm-btn btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
+            <p class="cancel-event"> Cancelar evento</p>
+          </div>
+        </div>
+        <div class="divider">
+          
+        </div>
+         <div class="section">
+          
+        </div>
+        <div class="row valign-wrapper">
+          <div style="margin-left: 10px; padding-left: 0; text-align: center" class="col l2 m2 s2">
+            <img src="https://firebasestorage.googleapis.com/v0/b/work-out-348f6.appspot.com/o/sports%2Ficon%2Fcorrida.png?alt=media&token=a578cbe2-c02c-4aab-88b1-967824515693"
+              alt="" class="responsive-img">
+              <p  class="event-content truncate"> Corrida </p>
+          </div>
+          <div class="col l7 m7 s7 left-align">
+            <p class="event-content"><b class="event-title"> NOME: </b>&nbsp; Corrida de todos os setores</p> 
+            <p class="event-content"><b class="event-title">LOCAL: </b>&nbsp; Av. Morges de Medeiros, 1424 - Lagoa</p> 
+            <p class="event-content"><b class="event-title"> DATA: </b>&nbsp;16/02/2016 - 20h30 </p> 
+            <p class="event-content"><b class="event-title"> CONFIRMADOS:  </b>&nbsp; 36 </p>
+          </div>
+          <div class="col l3 m3 s3" style="float:right; text-align: center">
+            <a class="confirm-btn btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
+            <p class="cancel-event"> Cancelar evento</p>
+          </div>
+        </div>
+      </div>
+          <a class="btn-floating btn-large waves-effect waves-light green card-title activator add-btn"><i class="material-icons">add</i></a>
+
+
+<div class="card-reveal">
+      <span class="card-title filter-title grey-text text-darken-4">Criar Evento<i class="material-icons right">close</i></span>
+      <div class="divider"> </div>
+      <div class="filter-container">
+
+         <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input  id="nome" type="text" >
+          <label for="nome">Nome</label>
+        </div>
+        <div class="input-field col s6">
+           <select  materialize="material_select">
+                        <option value="TODOS" disabled selected>Escolha o esporte</option>
+                        <option   value="RH">RH</option>
+                        <option  value="TI">TI</option>
+                        <option  value="FINANCEIRO">FINANCEIRO</option>
+                  </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+         <input class="datepicker" materialize="pickadate" [materializeParams]="[dateOptions]" type="text"  >
+          <label for="datepicker">Data</label>
+        </div>
+        <div class="input-field col s3">
+            <input id="min" type="number" >
+          <label for="min">Min Pessoas</label>
+        </div>
+         <div class="input-field col s3">
+            <input id="max" type="number" >
+          <label for="max">Max Pessoas</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 m6">
+          <input id="local" type="text" >
+          <label for="local">Local</label>
+        </div>
+        <div class="input-field  col l4 m4  s10 ">
+          
+          <input [textMask]="{mask: CEPmask}" [(ngModel)]="cep" name="cep" [ngModelOptions]="{standalone: true}" (ngModelChange)="onCEPChange($event)"
+            id="cep" type="text">
+            <label for="cep">CEP</label>
+      </div>
+       <!-- loader -->
+        <div *ngIf="showCepLoading" class="input-field  col l2 m2  s2 ">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-red-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="row">
+        
+        </div>
+       
+      </div>
+      <div class="row">
+        <div class="input-field  col l8 m6  s10 ">
+          <input [focus]="focusFields[0]" [(ngModel)]="address.street" name="street" id="street" type="text">
+          <label for="street">Endereço</label>
+        </div>
+        <div class="input-field  col l1 m2  s2 ">
+          <input [(ngModel)]="address.number" name="number" id="number" type="text">
+          <label [focus]="focusFields[5]" for="number">Nº</label>
+        </div>
+        <div class="input-field  col l3 m4  s12 ">
+          <input [(ngModel)]="address.complement" name="complement" id="complement" type="text">
+          <label for="complement">Complemento</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field  col l4 m5  s10 ">
+          <input [focus]="focusFields[1]" [(ngModel)]="address.neighbor" name="neighbor" id="neighbor" type="text">
+          <label for="neighbor">Bairro</label>
+        </div>
+        <div class="input-field  col l1 m1  s2 ">
+          <input [focus]="focusFields[2]" [(ngModel)]="address.state" name="state" id="state" type="text">
+          <label for="state">Estado</label>
+        </div>
+        <div class="input-field  col l4 m4  s6 ">
+          <input [focus]="focusFields[3]" [(ngModel)]="address.city" name="city" id="city" type="text">
+          <label for="city">Cidade</label>
+        </div>
+        <div class="input-field  col l3 m2  s6 ">
+          <input [focus]="focusFields[4]" [(ngModel)]="address.country" name="country" id="country" type="text">
+          <label for="country">País</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <textarea id="desc" class="materialize-textarea" data-length="120"></textarea>
+            <label for="desc">Descrição</label>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <span style="color:#9e9e9e"> Recorrência</span> 
+          <div class="input-field">
+            <input type="checkbox" id="seg" />
+      <label class="sport-checkbox"  for="seg">Seg</label>
+        <input type="checkbox" id="ter" />
+      <label class="sport-checkbox"  for="ter">Ter</label>
+        <input type="checkbox" id="qua" />
+      <label class="sport-checkbox"  for="qua">Quar</label>
+        <input type="checkbox" id="qui" />
+      <label class="sport-checkbox"  for="qui">Qui</label>
+        <input type="checkbox" id="sex" />
+      <label class="sport-checkbox"  for="sex">Sex</label>
+        <input type="checkbox" id="sab" />
+      <label class="sport-checkbox"  for="sab">Sab</label>
+        <input type="checkbox" id="dom" />
+      <label class="sport-checkbox"  for="dom">Dom</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+     
+      </div>
+
+     <a class="waves-effect waves-light red btn btn-create">Criar</a>
+    </div>
+    </div>
+ 
+</div>
