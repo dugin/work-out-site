@@ -12,11 +12,16 @@ export class WeekModel {
 
 export class TimeModel {
 
-     constructor(
-      
-        public ini: string,
-        public fim: string
+    public start: string;
+    public end: string
 
+    constructor(
+    ) { 
+        this.init();
+        }
 
-    ) { }
+    init() {
+        this.start = '';
+        this.end = '';
+    }
 }

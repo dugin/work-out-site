@@ -1,54 +1,41 @@
 
-.row .col {
-    padding: 0;
-    }
 
-.brand-logo {
-  margin-left: 10px;
-} 
- 
-.main{
-    padding: 30px;
-    position: relative;
-    text-align: center;
+.form {
+    background: white;
+    padding: 0 20px;
 }
 
 .title{
-    font-weight: 500;
-    font-size: 28px;
-    color: rgba(0, 0, 0, .8)
+    margin: 40px 0 ;
+    text-align: center;
 }
 
-.create-account{
-    text-decoration: underline;
-    color: black;
-    font-size: 16px;
-    font-weight: 400;
+.img-logo{
+   position: relative;
+ left:50%;
+ transform: translateX(-53%)
 }
 
-.login-card{
-    display: inline-block; 
-    padding: 32px 48px 0px 35px;
-     border: 1px solid #EEE;
+label.upload {
+ position: relative;
+ left:50%;
+   color:  rgb(244, 67, 54);
+ transform: translateX(-50%)
 }
 
-@media screen and (max-width: 569px) {
-
-    .login-card{
-   
-    padding:15px;
-    }
-
-    .input-field{
-        padding-left: 0;
-    }
-
-    .title{
-        font-size: 20px;
-        margin-bottom: 0;
-    }
-    .main{
-    padding: 10px;
-    }
-    
+.file-text {
+  font-size: 13px;
+  font-weight: 300;
 }
+
+
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+ 

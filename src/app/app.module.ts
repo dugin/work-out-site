@@ -29,6 +29,7 @@ import { AdminComponent } from './components/admin/admin.component';
 
 // shared components
 // chart component
+import { BarChartComponent } from './components/shared/charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/shared/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './components/shared/charts/line-chart/line-chart.component';
 import { SideNavComponent } from './components/shared/side-nav/side-nav.component';
@@ -60,7 +61,8 @@ export const firebaseConfig = {
     PieChartComponent,
     LineChartComponent,
     SideNavComponent,
-    EventsComponent
+    EventsComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

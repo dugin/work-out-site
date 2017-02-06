@@ -4,6 +4,14 @@
 }
 }
 
+.card{
+  min-height: 600px;
+}
+
+.row{
+  margin-bottom: 0;
+}
+
 .page{
  padding-left: 240px;
 }
@@ -21,7 +29,7 @@
 
 .timestamp {
   margin-top: 5px !important;
-  ;
+  
   color: rgba(0, 0, 0, .5) !important;
   font-size: 13px;
 }

@@ -13,9 +13,9 @@
   <h5 class="title" style="padding: 10px 0"> // Informações Gerais</h5>
   <!-- row1-->
   <div class="row">
-    <form class="col l12 m12 s12  form">
-      <div class="row input-container">
-        <div style="padding: 0;" class="logo input-field col    s4 m4 l4  ">
+    <div class="col l12 m12 s12  form">
+      <div class="row input-container valign-wrapper">
+        <div style="padding: 0;" class="logo input-field col  valign  s4 m4 l4  ">
           <img class="circle responsive-img img-logo" [src]="!logoPath? 'assets/img/no-image.png' : logoPath" height="100px" width="100px">
         </div>
         <div class="input-field col l8 m8 s8">
@@ -33,7 +33,7 @@
         </div>
         <div class="input-field col l8 m8 s8 ">
           <i class="material-icons prefix">account_balance_wallet</i>
-          <input [textMask]="{mask: CNPJmask}" [(ngModel)]="corporate.cnpj" name="cnpj" id="cnpj" type="text">
+          <input [textMask]="{mask: CNPJmask}" [(ngModel)]="corporate.CNPJ" name="cnpj" id="cnpj" type="text">
           <label for="cnpj">CNPJ</label>
         </div>
       </div>
@@ -41,7 +41,7 @@
       <div class="row">
         <div class="input-field  col l8 m8 s8 offset-l4 offset-m4  offset-s4 ">
           <i class="material-icons prefix">people</i>
-          <input [(ngModel)]="corporate.employeeAmount" name="employeeAmount" id="employeeAmount" type="number" />
+          <input [(ngModel)]="corporate.numEmployees" name="employeeAmount" id="employeeAmount" type="number" />
           <label for="employeeAmount">Nº de Funcionários</label>
         </div>
       </div>
@@ -65,7 +65,7 @@
       <div class="row">
         <div class="input-field  col l4 m4  s10 ">
           <i class="material-icons prefix">local_post_office</i>
-          <input [textMask]="{mask: CEPmask}" [(ngModel)]="corporate.cep" name="cep" [ngModelOptions]="{standalone: true}" (ngModelChange)="onCEPChange($event)"
+          <input [textMask]="{mask: CEPmask}" [(ngModel)]="corporate.address.zipCode" name="cep" [ngModelOptions]="{standalone: true}" (ngModelChange)="onCEPChange($event)"
             id="cep" type="text">
             <label for="cep">CEP</label>
         </div>
@@ -93,7 +93,7 @@
           <label for="street">Endereço</label>
         </div>
         <div class="input-field  col l1 m2  s2 ">
-          <input [(ngModel)]="corporate.address.number" name="number" id="number" type="text">
+          <input ngModel [(ngModel)]="corporate.address.number" name="number" id="number" type="text">
           <label [focus]="focusFields[5]" for="number">Nº</label>
         </div>
         <div class="input-field  col l3 m4  s12 ">
@@ -103,7 +103,7 @@
       </div>
       <div class="row">
         <div class="input-field  col l4 m5  s10 ">
-          <input [focus]="focusFields[1]" [(ngModel)]="corporate.address.neighbor" name="neighbor" id="neighbor" type="text">
+          <input [focus]="focusFields[1]" [(ngModel)]="corporate.address.neighborhood" name="neighbor" id="neighbor" type="text">
           <label for="neighbor">Bairro</label>
         </div>
         <div class="input-field  col l1 m1  s2 ">
@@ -124,14 +124,14 @@
           <h5 class="title"> // Departamentos</h5>
         </div>
         <div class="col l2 m2  s2 ">
-          <a (click)="this.corporate.departaments.push('');" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <a (click)="onNewDepartament()" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
         </div>
       </div>
       <div class="row">
-        <div *ngFor="let dpt of corporate.departaments; let i = index" class="input-field  col l3 m4  s6 ">
+        <div *ngFor="let dpt of departaments; let x = index" class="input-field  col l3 m4  s6 ">
           <i class="material-icons prefix">dashboard</i>
-          <input name="departaments" id="dpt{{i}}" type="text">
-          <label for="dpt{{i}}">Departamento</label>
+          <input [(ngModel)]="departaments[x].value" name="departaments" id="dpt{{x}}" type="text">
+          <label for="dpt{{x}}">Departamento</label>
         </div>
       </div>
       <div class="row title-row">
@@ -139,15 +139,25 @@
           <h5 class="title"> // Admins</h5>
         </div>
         <div class="col l2 m2  s2 ">
-          <a (click)="this.corporate.admins.push('');" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <a (click)="onNewAdmin()" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
         </div>
       </div>
-      <div class="row">
-        <div *ngFor="let adm of corporate.admins; let i = index" class="input-field  col l4 m4  s6 ">
+      <div class="row" *ngFor="let adm of corporate.admins; let i = index">
+        <div  class="input-field  col l6 m6  s12 ">
           <i class="material-icons prefix">email</i>
-          <input name="admins" id="admin{{i}}" type="text">
+          <input [(ngModel)]="corporate.admins[i].email" name="admins" id="admin{{i}}" type="text">
           <label for="admin{{i}}">Email</label>
         </div>
+         <div  class="input-field  col l6 m6  s12 ">
+
+            <select [(ngModel)]="adm.permission"  materialize="material_select">
+                        <option value="" disabled selected>Permissão</option>
+                        <option   value="ADMINISTRADOR">ADMINISTRADOR</option>
+                        <option  value="EDITOR">EDITOR</option>
+                        <option  value="MODERADOR">MODERADOR</option>
+                  </select>
+
+             </div>
       </div>
       <div class="row title-row">
         <h5 class="title"> // Esportes</h5>
@@ -170,7 +180,7 @@
       <div class="row" *ngIf="isSportsSelected && sports">
         <div class="input-field col s12">
           <span *ngFor="let sport of sports, let i = index">
-      <input type="checkbox" id="sport{{i}}" />
+      <input  (click)="onSportChecked(i)" type="checkbox" id="sport{{i}}" />
       <label class="sport-checkbox"  for="sport{{i}}">{{sport.name}}</label>
     </span>
         </div>
@@ -184,27 +194,38 @@
             <p class="weekDay"> {{sch.weekDay}}</p>
           </div>
           <div class="col l2 m2  s2 ">
-            <a (click)="sch.time.push('');" style="margin-top: 10px;" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
+            <a (click)="onNewTime(i)" style="margin-top: 10px;" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
         </div>
         <div class="row" *ngFor="let time of sch.time; let j = index">
           <div class="input-field  col l6 m6  s6 ">
             <i class="material-icons prefix">schedule</i>
-            <input [textMask]="{mask: Timemask}" name="ini" id="ini{{i}}{{j}}" type="text">
+            <input  [(ngModel)]="sch.time[j].start" [textMask]="{mask: Timemask}" name="ini" id="ini{{i}}{{j}}" type="text">
             <label for="ini{{i}}{{j}}">Início</label>
           </div>
           <div class="input-field  col l6 m6  s6 ">
             <i class="material-icons prefix">schedule</i>
-            <input [textMask]="{mask: Timemask}" name="fim" id="fim{{i}}{{j}}" type="text">
+            <input  [(ngModel)]="sch.time[j].end" [textMask]="{mask: Timemask}" name="fim" id="fim{{i}}{{j}}" type="text">
             <label for="fim{{i}}{{j}}">Término</label>
           </div>
         </div>
       </div>
       <div class="row title-row" style="margin-top: 25px; margin-bottom: 0">
-        <button class="btn waves-effect waves-light red" type="submit" name="action">Enviar
+        <button class="btn waves-effect waves-light red" (click)="onSubmit()" name="action">Enviar
     <i class="material-icons right">send</i>
   </button>
       </div>
-    </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+  <div class="modal-content">
+    <h4>{{isError? 'Erro' : 'Sucesso' }}</h4>
+    <p>{{isError? 'Erro no Cadastro' : 'Cadastro realizado com sucesso' }}</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">OK</a>
   </div>
 </div>

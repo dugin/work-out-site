@@ -31,8 +31,16 @@ export class CepService {
 
   private cepToAddress(cep: CepModel){
 
-    return new AddressModel(cep.cep, cep.logradouro, null, null, cep.bairro, cep.localidade, cep.uf, 'Brasil')
+   let address =  new AddressModel();
 
+   address.city =cep.localidade;
+   address.country = 'Brasil';
+   address.neighborhood = cep.bairro;
+   address.state =  cep.uf;
+   address.street = cep.logradouro;
+   address.zipCode = cep.cep;
+
+   return address;
   }
 
 

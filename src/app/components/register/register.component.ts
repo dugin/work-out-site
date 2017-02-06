@@ -1,5 +1,7 @@
+import { AdminModel } from './../../model/admin';
+import { SportsModel } from './../../model/sports';
 import { FirebaseService } from './../../services/firebase.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { MaskUtil } from '../../util/mask.util';
 import { CepService } from '../../services/cep.service';
@@ -7,6 +9,7 @@ import { CorporateModel } from '../../model/corporate';
 import { AddressModel } from '../../model/address';
 import { WeekModel } from '../../model/time';
 import { TimeModel } from '../../model/time';
+import { MaterializeAction } from 'angular2-materialize';
 
 declare var Materialize: any;
 
@@ -22,12 +25,17 @@ export class RegisterComponent implements OnInit {
   public CEPmask = MaskUtil.getCEP();
   public Timemask = MaskUtil.getTime();
 
+  isError: boolean;
+  modalActions = new EventEmitter<string | MaterializeAction>();
   logoPath: string;
   bannerPath: string;
-  corporate: CorporateModel;
+  corporate: CorporateModel = new CorporateModel();
   isSportsSelected: boolean;
+  sports: Array<any>;
+  departaments = new Array<{ value: '' }>();
+  logoFile: File;
+  bannerFile: File;
 
-  sports;
 
   showCepLoading: boolean;
   focusFields = new Array<boolean>(6);
@@ -48,6 +56,16 @@ export class RegisterComponent implements OnInit {
 
 
   }
+
+  onSportChecked(i) {
+
+    if (this.sports[i].isChecked)
+      this.sports[i].isChecked = false;
+
+    else
+      this.sports[i].isChecked = true;
+
+  }
   change(event) {
     console.log(event);
 
@@ -57,8 +75,8 @@ export class RegisterComponent implements OnInit {
   initializeObj() {
 
 
-    this.corporate = new CorporateModel('', '', null, '', '', new AddressModel('', '', null, '', '', '', '', ''), new Array<string>(), new Array<string>(), new Array<WeekModel>());
     this.focusFields = this.focusFields.fill(false);
+    this.departaments.push({ value: '' });
 
     this.corporate.schedule.push(new WeekModel('Segunda', 'seg', new Array<TimeModel>()));
     this.corporate.schedule.push(new WeekModel('Terça', 'ter', new Array<TimeModel>()));
@@ -68,10 +86,22 @@ export class RegisterComponent implements OnInit {
     this.corporate.schedule.push(new WeekModel('Sábado', 'sab', new Array<TimeModel>()));
     this.corporate.schedule.push(new WeekModel('Domingo', 'dom', new Array<TimeModel>()));
 
-    this.corporate.departaments.push('');
-    this.corporate.admins.push('');
+    this.corporate.admins.push(new AdminModel());
 
 
+  }
+
+  onNewTime(i: number) {
+
+    this.corporate.schedule[i].time.push(new TimeModel());
+
+  }
+  onNewAdmin() {
+    this.corporate.admins.push(new AdminModel());
+  }
+
+  onNewDepartament() {
+    this.departaments.push({ value: '' });
   }
 
   getLogo(event) {
@@ -81,6 +111,11 @@ export class RegisterComponent implements OnInit {
   }
 
   getFile(event, isLogoPath: boolean) {
+
+    if (isLogoPath)
+      this.logoFile = event.srcElement.files[0];
+    else
+      this.bannerFile = event.srcElement.files[0];
 
     let reader = new FileReader();
 
@@ -104,7 +139,7 @@ export class RegisterComponent implements OnInit {
 
   onCEPChange(event: string) {
 
-    this.corporate.address.cep = event;
+    this.corporate.address.zipCode = event;
 
 
     if (this.lastCharIsNumber())
@@ -115,7 +150,7 @@ export class RegisterComponent implements OnInit {
 
   lastCharIsNumber() {
 
-    return !isNaN(parseInt(this.corporate.address.cep.charAt(this.corporate.address.cep.length - 1), 10))
+    return !isNaN(parseInt(this.corporate.address.zipCode.charAt(this.corporate.address.zipCode.length - 1), 10))
   }
 
   focus() {
@@ -132,7 +167,7 @@ export class RegisterComponent implements OnInit {
 
     this.showCepLoading = true;
 
-    this.cepService.getCep(this.corporate.address.cep)
+    this.cepService.getCep(this.corporate.address.zipCode)
       .subscribe((addressModel) => {
 
         this.corporate.address = addressModel;
@@ -143,6 +178,58 @@ export class RegisterComponent implements OnInit {
 
       })
   }
+
+  openModal() {
+    this.modalActions.emit({ action: "modal", params: ['open'] });
+  }
+  closeModal() {
+    this.modalActions.emit({ action: "modal", params: ['close'] });
+  }
+
+
+  onSubmit() {
+
+    this.sports.forEach(sport => {
+
+      if (sport.isChecked)
+        this.corporate.sports.push(new SportsModel(sport.icon, sport.image, sport.name, null, sport.$key ));
+    });
+
+    this.departaments.forEach(dpt => {
+      this.corporate.departaments.push(dpt.value)
+    });
+
+
+    this.firebaseService.uploadFile(this.corporate.name, this.logoFile, true)
+      .subscribe((downloadURL) => {
+
+        this.corporate.logo = downloadURL
+
+        this.firebaseService.uploadFile(this.corporate.name, this.bannerFile, false)
+          .subscribe((downloadURL) => {
+
+            this.corporate.image = downloadURL;
+            console.dir(this.corporate)
+            this.firebaseService.pushCorporate(this.corporate)
+              .then((resolve) => {
+                this.isError = false;
+                this.openModal()
+
+              },
+              (reject) => {
+                this.isError = true;
+                this.openModal()
+
+
+              })
+          })
+
+      })
+
+
+  }
+
+
 
 
 }

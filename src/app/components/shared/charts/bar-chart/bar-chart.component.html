@@ -1,0 +1,21 @@
+<!-- pie chart card-->
+<div class="col s12 m12">
+  <div class="card">
+    <!-- pie toolbar-->
+    <div class="row card-title center-align">
+      
+      <span class="black-text">Análise dos Dados</span>
+    </div>
+    <div class="card-content">
+        <span style="margin-left: 10px"> (%)</span>
+        <span class="middle"> IMC</span>
+      <div class="row valign-wrapper">
+      
+        <div class="col l12 bar-chart" >
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+            [chartType]="barChartType"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>

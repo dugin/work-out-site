@@ -14,13 +14,21 @@ declare var $: any;
 export class EventsComponent implements OnInit {
 
   focusFields = new Array<boolean>(6);
+
+  isNewEvent: boolean = true;
+
  showCepLoading: boolean;
    public CEPmask = MaskUtil.getCEP();
   dateOptions = this.getDefaultPickaDateOption();
-  address = new AddressModel('','',null,'','','','','');  
+  address = new AddressModel();
   constructor(
       public cepService: CepService,
   ) { }
+
+
+  ngOnInit() {
+   
+  }
 
   private getDefaultPickaDateOption() {
     return {
@@ -38,7 +46,7 @@ export class EventsComponent implements OnInit {
   }
     onCEPChange(event: string) {
 
-    this.address.cep = event;
+    this.address.zipCode = event;
 
 
     if (this.lastCharIsNumber())
@@ -48,7 +56,7 @@ export class EventsComponent implements OnInit {
   }
    lastCharIsNumber() {
 
-    return !isNaN(parseInt(this.address.cep.charAt(this.address.cep.length - 1), 10))
+    return !isNaN(parseInt(this.address.zipCode.charAt(this.address.zipCode.length - 1), 10))
   }
    focus() {
 
@@ -64,7 +72,7 @@ export class EventsComponent implements OnInit {
 
     this.showCepLoading = true;
 
-    this.cepService.getCep(this.address.cep)
+    this.cepService.getCep(this.address.zipCode)
       .subscribe((addressModel) => {
 
         this.address = addressModel;
@@ -77,8 +85,16 @@ export class EventsComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-   
+
+  onHelper(){
+
+    this.isNewEvent = false;
+  }
+
+  onNewEvent(){
+
+    this.isNewEvent = true;
+
   }
 
 }
