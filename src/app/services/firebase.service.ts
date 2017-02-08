@@ -11,14 +11,29 @@ export class FirebaseService {
 
   sports: FirebaseListObservable<any[]>;
 
-  admin : FirebaseObjectObservable<any>;
+  admin: FirebaseObjectObservable<any>;
 
   constructor(
     @Inject(FirebaseApp) public firebaseApp: firebase.app.App,
     public af: AngularFire
   ) {
 
+
     this.getSports();
+  }
+
+  getRequestUsers(corporateID: string) {
+    return this.af.database.list('request_user/' + corporateID + '/')
+
+  }
+
+  getRequestUser(corporateID: string, userID: string) {
+    return this.af.database.object('request_user/' + corporateID + '/' + userID + '/')
+
+  }
+
+  getUser(userID: string) {
+    return this.af.database.object('user/' + userID)
   }
 
   getAdmin(corporateID: string, adminID: string) {
@@ -26,12 +41,13 @@ export class FirebaseService {
     return this.admin;
   }
 
-  updateAdmin(admin: any){
-    return  this.admin.update(admin);
+  updateAdmin(admin: any) {
+    return this.admin.update(admin);
   }
 
-  pushAdmin(admin: any){
-    return  this.af.database.list('admins')
+
+  pushAdmin(admin: any) {
+    return this.af.database.list('admins')
       .push(admin);
   }
 
@@ -77,7 +93,56 @@ export class FirebaseService {
 
   }
 
-   pushCorporate(corporate: CorporateModel) {
+  getCorporateSports(corporateID: string) {
+
+    return this.af.database.list('corporate/' + corporateID + '/sports/')
+
+  }
+
+  getCoporateEmployeesAmount(corporateID: string) {
+      
+       return this.af.database.object('corporate/' + corporateID + '/numEmployees/')
+  }
+
+
+
+  pushEvent(corporateID: string, event) {
+
+    console.log('pushEvent');
+
+
+
+    return this.af.database.list('corporate/' + corporateID + '/events/')
+      .push(event)
+      .then((resolve) => {
+
+        let key = resolve.toString().substring(resolve.toString().lastIndexOf('/') + 1);
+
+        return this.af.database.object('events/' + key)
+          .set(event);
+      })
+      .catch((err) => console.log(err));
+
+
+
+  }
+
+  getEvent(corporateID: string) {
+    return this.af.database.list('corporate/' + corporateID + '/events/')
+  }
+
+  setEventCanceled(corporateID: string, eventID: string, isHappening: boolean) {
+
+    return this.af.database.object('/events/' + eventID)
+      .update({ isHappening: isHappening })
+      .then(() => {
+         this.af.database.object('corporate/' + corporateID + '/events/' + eventID)
+          .update({ isHappening: isHappening });
+      })
+
+  }
+
+  pushCorporate(corporate: CorporateModel) {
 
     return this.af.database.list('corporate')
       .push(corporate)

@@ -10,11 +10,11 @@ export class LineChartComponent implements OnInit {
    public chartOptions: any = {
     responsive: true,
     maintainAspectRatio: false,
-    legend: {labels:{fontColor:"white", fontSize: 12}},
+    legend: {labels:{fontColor:"black", fontSize: 12}},
             scales: {
                 yAxes: [{
                     ticks: {
-                        fontColor: "white",
+                        fontColor: "black",
                         fontSize: 12,
                        
                         beginAtZero:true
@@ -22,7 +22,7 @@ export class LineChartComponent implements OnInit {
                 }],
                 xAxes: [{
                     ticks: {
-                        fontColor: "white",
+                        fontColor: "black",
                         fontSize: 12,
                         stepSize: 1,
                         beginAtZero:true

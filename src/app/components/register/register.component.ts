@@ -191,8 +191,11 @@ export class RegisterComponent implements OnInit {
 
     this.sports.forEach(sport => {
 
-      if (sport.isChecked)
-        this.corporate.sports.push(new SportsModel(sport.icon, sport.image, sport.name, null, sport.$key ));
+      if (sport.isChecked){
+        let s = new SportsModel();
+        s.id = sport.$key
+        this.corporate.sports.push(s);
+      }
     });
 
     this.departaments.forEach(dpt => {

@@ -5,16 +5,13 @@ import { Routes, RouterModule } from "@angular/router";
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
-
-
-
 const APP_ROUTES: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'main', component: MainComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register/admin/:id', component: AdminRegisterComponent },
     { path: 'admin', component: AdminComponent },
-    { path: '', redirectTo: 'register/admin/:id', pathMatch: 'full' },
+    { path: '', redirectTo: 'admin', pathMatch: 'full' },
     { path: '**', component: AdminRegisterComponent },
 
 

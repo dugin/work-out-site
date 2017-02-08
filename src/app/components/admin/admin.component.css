@@ -4,12 +4,21 @@
 }
 }
 
+.card-content{
+  padding: 10px 20px;
+}
+
 .card{
   min-height: 600px;
 }
 
 .row{
   margin-bottom: 0;
+}
+
+.noData{
+ font-size: 18px;
+ font-weight: 300;
 }
 
 .page{

@@ -4,8 +4,8 @@
   margin-bottom: 0;
 }
 
-.bg{
-  background-color: #f4a236;
+.title{
+  color:  black;
 }
 
 .card-reveal {
@@ -39,4 +39,9 @@
 
 .btn-save-filter {
   margin-top: 30px;
+}
+
+
+.btn-flat i{
+  color: black !important;
 }

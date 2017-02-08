@@ -12,54 +12,54 @@
           <span class="white-text">Solicitação de Ingresso</span>
         </div>
       </div>
-      <div  class="card-content">
+
+        <div style="text-align: center" *ngIf="noData" class="loading-center">
+         <span class="noData"> No momento não há novas solicitações
+   </span> 
+        </div>
+
+      <div *ngIf="users.length == 0 && !noData" class="loading-center">
+    <div class="preloader-wrapper big active  ">
+      <div class="spinner-layer spinner-red-only ">
+        <div class="circle-clipper left ">
+          <div class="circle "></div>
+        </div>
+        <div class="gap-patch ">
+          <div class="circle "></div>
+        </div>
+        <div class="circle-clipper right ">
+          <div class="circle "></div>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+      <div *ngFor="let user of users" class="card-content">
         <div class="row valign-wrapper">
           <div style="padding-left: 0 " class="col l2 m3 s3">
-            <img src="assets/img/avatar.png" alt="" class="circle responsive-img">
+            <img [src]="user.profilePic" alt="" class="circle responsive-img">
             <!-- notice the "circle" class -->
           </div>
           <div class="col l8 m7 s7">
             <p class="name">
-              Rodrigo Dugin Pagnuzzi Araujo
+             {{user.name}}
             </p>
             <p style="  font-size: 15px;" class="timestamp truncate">
-              rodrigodugin@gmail.com
+               {{user.emailCorporate}}
             </p>
             <p class="timestamp">
-              31/01/2016 - 12h30
+               {{user.timestamp}}
             </p>
           </div>
           <div class="col l2 m2 s2 confirm-btn right-align">
-            <a class="confirm-btn btn-floating btn-small waves-effect waves-light green"><i class="material-icons">done</i></a>
-            <a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
+            <a (click)="onAcceptEmployee(user)" class="confirm-btn btn-floating btn-small waves-effect waves-light green"><i class="material-icons">done</i></a>
+            <a (click)="onRejectEmployee(user)" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
           </div>
         </div>
+         <div style="margin-top: 15px" class="divider">
       </div>
-      <div class="divider">
       </div>
-      <div style=" padding-left: 10px " class="card-content">
-        <div class="row valign-wrapper">
-           <div style="margin-left: 0; padding-left: 0 " class="col l2 m3 s3">
-            <img src="assets/img/avatar.png" alt="" class="circle responsive-img">
-            <!-- notice the "circle" class -->
-          </div>
-          <div class="col l8 m7 s7">
-            <p class="black-text">
-              Fábio Mendonça
-            </p>
-             <p style="  font-size: 15px;" class="timestamp truncate">
-              fabiomas7@gmail.com
-            </p>
-             <p class="timestamp">
-              29/01/2016 - 08h45
-            </p>
-          </div>
-          <div class="col l2 m2 s2 confirm-btn right-align">
-            <a class="confirm-btn btn-floating btn-small waves-effect waves-light green"><i class="material-icons">done</i></a>
-            <a class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">clear</i></a>
-          </div>
-        </div>
-      </div>
+   
     </div>
   </div>
   <!-- end of request card-->

@@ -1,10 +1,16 @@
+import { UserModel } from './../../../model/user';
+import { SportsModel } from './../../../model/sports';
+import { FirebaseService } from './../../../services/firebase.service';
+import { EventsModel } from './../../../model/events';
 import { AddressModel } from './../../../model/address';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 import { MaskUtil } from '../../../util/mask.util';
 import { CepService } from '../../../services/cep.service';
-
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 declare var $: any;
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-events',
@@ -15,19 +21,124 @@ export class EventsComponent implements OnInit {
 
   focusFields = new Array<boolean>(6);
 
+  corporateID = '-KcF-tBV05Gt9bi-j0-_';
+
   isNewEvent: boolean = true;
 
- showCepLoading: boolean;
-   public CEPmask = MaskUtil.getCEP();
+  showCepLoading: boolean;
+  public CEPmask = MaskUtil.getCEP();
+  public timeMask = MaskUtil.getTime();
   dateOptions = this.getDefaultPickaDateOption();
-  address = new AddressModel();
+  sports = new Array<SportsModel>();
+  sportID: number;
+  weekDay = '';
+  event = new EventsModel();
+  events = new Array<EventsModel>();
+  noDate = false;
+  isHappeningCount: number;
+ 
+   usersID = new Array<string>();
+
   constructor(
-      public cepService: CepService,
-  ) { }
+    public cepService: CepService,
+    public firebaseService: FirebaseService
+  ) {
+    moment.locale('pt-BR');
+  }
 
 
   ngOnInit() {
+
+  
+
+    this.getCorporateSports();
+    this.getEvents();
+
+    
+    
+  }
+
+  getCorporateSports() {
+    this.firebaseService.getCorporateSports(this.corporateID)
+      .subscribe((data) => {
+       
+
+        this.sports = data;
+      });
+
+
+  }
+
+
+onCancelEvent(eventKey: string){
+  
+  this.setCanceledEvent(eventKey)
+
+}
+
+setCanceledEvent(eventKey : string){
+
+  this.firebaseService.setEventCanceled(this.corporateID, eventKey, false )
+  
+}
+  
+
+  getEvents() {
+    this.firebaseService.getEvent(this.corporateID)
+    .subscribe((data)=>{
+
+     
+     
+       this.events = data;
+       this.getUsersInEvent();
+    })
+
+
+  }
+
+  getUsersInEvent(){
+
+    let clear = true;
+
    
+      this.isHappeningCount = 0;
+
+    this.events.forEach(event => {
+
+        if(event.isHappening)
+        this.isHappeningCount++;
+
+        
+        if(event.users)
+      this.usersID = _.cloneDeep(<any[]>event.users) ;
+
+      if(clear)
+      event.users = new Array<UserModel>() 
+      else
+      clear = false;
+       
+        
+       this.usersID.forEach(userID => {
+         
+             this.firebaseService.getUser(userID)
+             .subscribe((user: UserModel)=>{
+   
+              event.users.push(user);
+        
+               
+             })    
+     
+      } )
+     
+      
+    });
+
+    console.log(  this.isHappeningCount);
+    
+
+  
+         
+      
   }
 
   private getDefaultPickaDateOption() {
@@ -44,9 +155,9 @@ export class EventsComponent implements OnInit {
       showMonthsShort: true
     };
   }
-    onCEPChange(event: string) {
+  onCEPChange(event: string) {
 
-    this.address.zipCode = event;
+    this.event.address.zipCode = event;
 
 
     if (this.lastCharIsNumber())
@@ -54,11 +165,11 @@ export class EventsComponent implements OnInit {
 
 
   }
-   lastCharIsNumber() {
+  lastCharIsNumber() {
 
-    return !isNaN(parseInt(this.address.zipCode.charAt(this.address.zipCode.length - 1), 10))
+    return !isNaN(parseInt(this.event.address.zipCode.charAt(this.event.address.zipCode.length - 1), 10))
   }
-   focus() {
+  focus() {
 
     for (let i = 0; i < this.focusFields.length; i++)
       setTimeout(() => {
@@ -72,10 +183,10 @@ export class EventsComponent implements OnInit {
 
     this.showCepLoading = true;
 
-    this.cepService.getCep(this.address.zipCode)
+    this.cepService.getCep(this.event.address.zipCode)
       .subscribe((addressModel) => {
 
-        this.address = addressModel;
+        this.event.address = addressModel;
 
         this.showCepLoading = false;
         this.focus();
@@ -84,17 +195,47 @@ export class EventsComponent implements OnInit {
       })
   }
 
-
-
-  onHelper(){
+  onHelper() {
 
     this.isNewEvent = false;
   }
 
-  onNewEvent(){
+  onNewEvent() {
 
     this.isNewEvent = true;
 
   }
+
+  onDatePickerChange(event) {
+    this.weekDay = moment(event, "DD MMMM, YYYY").format('ddd');
+
+
+  }
+
+  setSportModel() {
+
+    this.event.sport.icon = this.sports[this.sportID].icon;
+    this.event.sport.image = this.sports[this.sportID].image;
+    this.event.sport.name = this.sports[this.sportID].name;
+    this.event.sport.id = this.sports[this.sportID].id;
+
+
+  }
+
+  onCreateEvent() {
+
+    this.setSportModel();
+
+    this.firebaseService.pushEvent(this.corporateID, this.event)
+      .then((resolve) => {
+
+        this.event = new EventsModel();
+     
+
+      })
+
+  }
+
+
 
 }
