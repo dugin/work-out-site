@@ -3,7 +3,8 @@
     <div class="row card-title">
       <div class="col l12 m12 s12 center-align">
         <span class="white-text">Eventos</span>
-                <a style="float: right" (click)="onHelper()" class="waves-effect card-title activator waves-red btn-flat"><i class="material-icons">lightbulb_outline</i></a>
+                <a style="float: left" (click)="onHelper()" class="waves-effect card-title activator waves-red btn-flat"><i class="material-icons">lightbulb_outline</i></a>
+                <a style="float: right" (click)="onNewEvent()" class="waves-effect card-title activator waves-red btn-flat"><i class="material-icons">add</i></a>
 
       </div>
      
@@ -31,7 +32,7 @@
     </div>
   </div>
       
-   <div  *ngFor="let event of events" style=" padding-left: 10px ">
+   <div  *ngFor="let event of events; let i = index" style=" padding-left: 10px ">
     <div  *ngIf="event.isHappening" class="card-content">
 
       
@@ -47,15 +48,16 @@
           <p class="event-content"><b class="event-title">NOME: </b>&nbsp; {{event.name}} </p>
           <p class="event-content"><b class="event-title">LOCAL: </b>&nbsp; {{event.place}}</p> 
           <p class="event-content"><b class="event-title"> DATA: </b>&nbsp; {{event.date}}  {{event.time.start}} - {{event.time.end}} </p>
-          <p class="event-content"><b class="event-title"> CONFIRMADOS:  </b>&nbsp; <span [style.color]="usersID.length < event.participants.min ? 'red': '#f2f2f2'"> {{ usersID.length }}</span>/{{event.participants.max}}</p>
+       
+          <p class="event-content"><b class="event-title"> CONFIRMADOS:  </b>&nbsp; <span [style.color]="usersID[i].length < event.participants.min ? 'red': 'black'"> {{ usersID[i].length }}</span>/{{event.participants.max}}</p>
           
-          <div *ngFor="let user of event.users; let i = index" style="margin-top: 5px">
+          <div *ngFor="let user of event.users; let x= index" style="margin-top: 5px">
             
            <span >
-          <div [style.margin-left]="i == 0 ? '0px' : '-3px' " style="padding-left: 0; text-align: center" class="col l2 m2 s4" >
+          <div [style.margin-left]="x == 0 ? '0px' : '-3px' " style="padding-left: 0; height: 60px; width: 60px ;text-align: center" class="col l2 m2 s4" >
           <img class="circle"  [src]='user.profilePic'
-            alt="" height="40px" width="auto" >
-            <p style="font-size: 12px; font-weight: 300;margin-top: -6px">{{user.name}} </p>
+            alt="" height="30px" width="auto" >
+            <p  style="font-size: 10px; font-weight: 300;margin-top: -6px">{{user.name}} </p>
         </div>
           </span>
             </div>
@@ -72,8 +74,9 @@
        </div>
     </div>
 
-      
-    <a (click)="onNewEvent()" class="btn-floating btn-large waves-effect waves-light green card-title activator add-btn"><i class="material-icons">add</i></a>
+     
+    
+   
     <div class="card-reveal">
       <div *ngIf="!isNewEvent">
         <span class="card-title filter-title grey-text text-darken-4">Seleção<i class="material-icons right">close</i></span>
@@ -245,8 +248,10 @@
             </div>
           </div>
         </div>
+    
         <a (click)="onCreateEvent()" class="waves-effect waves-light red btn btn-create card-title">Criar</a>
-      </div>
+     
+       </div>
     </div>
   </div>
 </div>

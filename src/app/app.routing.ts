@@ -12,7 +12,7 @@ const APP_ROUTES: Routes = [
     { path: 'register/admin/:id', component: AdminRegisterComponent },
     { path: 'admin', component: AdminComponent },
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
-    { path: '**', component: AdminRegisterComponent },
+    { path: '**', component: MainComponent },
 
 
 ]

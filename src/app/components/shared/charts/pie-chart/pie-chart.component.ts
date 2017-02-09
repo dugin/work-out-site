@@ -23,6 +23,7 @@ export class PieChartComponent implements OnInit {
 
   constructor(
     public firebaseService: FirebaseService
+   
   ) { }
 
   ngOnInit() {
@@ -36,6 +37,10 @@ export class PieChartComponent implements OnInit {
     this.firebaseService.getRequestUsers(this.corporateID)
       .subscribe((data) => {
 
+          this.dataReady = false;
+        
+            this.pieChartData = [0, 0, 0];
+           
         data.forEach(userRequest => {
 
 
@@ -55,12 +60,18 @@ export class PieChartComponent implements OnInit {
   getCoporateEmployeesAmount() {
     this.firebaseService.getCoporateEmployeesAmount(this.corporateID)
       .subscribe((data) => {
-        this.pieChartData.forEach(element => {
-          console.log('dado: ' + element);
-
-        });
+      
         this.pieChartData[2] = data.$value - this.pieChartData[1] - this.pieChartData[0];
-        this.dataReady = true;
+
+          setTimeout(()=> {
+             this.dataReady = true;
+               console.log('dataReady '+ this.dataReady);
+          }, 100);
+       
+
+         
+        
+       
       })
   }
 

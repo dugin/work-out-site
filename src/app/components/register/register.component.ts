@@ -212,7 +212,9 @@ export class RegisterComponent implements OnInit {
           .subscribe((downloadURL) => {
 
             this.corporate.image = downloadURL;
+
             console.dir(this.corporate)
+            
             this.firebaseService.pushCorporate(this.corporate)
               .then((resolve) => {
                 this.isError = false;

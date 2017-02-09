@@ -11,6 +11,8 @@ import * as moment from 'moment';
 import 'moment/locale/pt-br';
 declare var $: any;
 import * as _ from "lodash";
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-events',
@@ -22,6 +24,8 @@ export class EventsComponent implements OnInit {
   focusFields = new Array<boolean>(6);
 
   corporateID = '-KcF-tBV05Gt9bi-j0-_';
+
+
 
   isNewEvent: boolean = true;
 
@@ -36,12 +40,13 @@ export class EventsComponent implements OnInit {
   events = new Array<EventsModel>();
   noDate = false;
   isHappeningCount: number;
- 
-   usersID = new Array<string>();
+
+  usersID = new Array<string[]>();
 
   constructor(
     public cepService: CepService,
-    public firebaseService: FirebaseService
+    public firebaseService: FirebaseService,
+    public sanitizer: DomSanitizer,
   ) {
     moment.locale('pt-BR');
   }
@@ -49,19 +54,18 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
 
-  
-
     this.getCorporateSports();
     this.getEvents();
 
-    
-    
+
   }
+
+
 
   getCorporateSports() {
     this.firebaseService.getCorporateSports(this.corporateID)
       .subscribe((data) => {
-       
+
 
         this.sports = data;
       });
@@ -70,76 +74,102 @@ export class EventsComponent implements OnInit {
   }
 
 
-onCancelEvent(eventKey: string){
-  
-  this.setCanceledEvent(eventKey)
+  onCancelEvent(eventKey: string) {
 
-}
+    this.setCanceledEvent(eventKey)
 
-setCanceledEvent(eventKey : string){
+  }
 
-  this.firebaseService.setEventCanceled(this.corporateID, eventKey, false )
-  
-}
-  
+  setCanceledEvent(eventKey: string) {
+
+    this.firebaseService.setEventCanceled(this.corporateID, eventKey, false)
+
+  }
+
 
   getEvents() {
     this.firebaseService.getEvent(this.corporateID)
-    .subscribe((data)=>{
+      .subscribe((data) => {
 
-     
-     
-       this.events = data;
-       this.getUsersInEvent();
-    })
+
+
+        this.events = data;
+
+        this.sortEventsByDate();
+
+        this.getUsersInEvent();
+      })
 
 
   }
 
-  getUsersInEvent(){
+  sortEventsByDate() {
+    return this.events.sort((a, b) => {
+
+      let date1 = moment(a.date, "DD MMMM, YYYY HH'h'mm");
+      let date2 = moment(b.date, "DD MMMM, YYYY HH'h'mm");
+
+      if (date1.isAfter(date2))
+        return 1
+      else if (date1.isSame(date2))
+        return 0
+
+      else -1
+    })
+  }
+
+  getUsersInEvent() {
 
     let clear = true;
 
-   
-      this.isHappeningCount = 0;
+    this.usersID = new Array<string[]>();
+    this.isHappeningCount = 0;
 
-    this.events.forEach(event => {
+    this.events.forEach((event, i) => {
 
-        if(event.isHappening)
+      if (event.isHappening)
         this.isHappeningCount++;
 
-        
-        if(event.users)
-      this.usersID = _.cloneDeep(<any[]>event.users) ;
 
-      if(clear)
-      event.users = new Array<UserModel>() 
+      if (event.users)
+        this.usersID.push(_.cloneDeep(<any[]>event.users));
       else
-      clear = false;
-       
-        
-       this.usersID.forEach(userID => {
-         
-             this.firebaseService.getUser(userID)
-             .subscribe((user: UserModel)=>{
-   
-              event.users.push(user);
-        
-               
-             })    
-     
-      } )
-     
-      
+        this.usersID[i] = new Array<string>();
+
+
+      if (clear)
+        event.users = new Array<UserModel>()
+      else
+        clear = false;
+
+      this.usersID[i] = this.usersID[i].filter((element) => {
+        return element !== undefined;
+      });
+
+      this.usersID[i].forEach(userID => {
+
+        this.firebaseService.getUser(userID)
+          .subscribe((user) => {
+
+            event.users.push(user);
+
+          })
+
+      });
+
+
+
+
     });
 
-    console.log(  this.isHappeningCount);
-    
 
-  
-         
-      
+
+
+
+
   }
+
+
 
   private getDefaultPickaDateOption() {
     return {
@@ -195,13 +225,16 @@ setCanceledEvent(eventKey : string){
       })
   }
 
+  onCloseFilter() {
+
+  }
+
   onHelper() {
 
     this.isNewEvent = false;
   }
 
   onNewEvent() {
-
     this.isNewEvent = true;
 
   }
@@ -224,13 +257,15 @@ setCanceledEvent(eventKey : string){
 
   onCreateEvent() {
 
+
+
     this.setSportModel();
 
     this.firebaseService.pushEvent(this.corporateID, this.event)
       .then((resolve) => {
 
         this.event = new EventsModel();
-     
+
 
       })
 

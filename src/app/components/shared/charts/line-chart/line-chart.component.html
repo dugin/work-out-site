@@ -5,11 +5,27 @@
           <span class="black-text">Inteligência dos Cadastrados</span>
         </div>
       </div>
-        <div style=" padding-left: 10px; margin-left: -15px;" class="card-content">
+
+       <div *ngIf="!lineChartData" class="loading-center">
+    <div class="preloader-wrapper big active  ">
+      <div class="spinner-layer spinner-red-only ">
+        <div class="circle-clipper left ">
+          <div class="circle "></div>
+        </div>
+        <div class="gap-patch ">
+          <div class="circle "></div>
+        </div>
+        <div class="circle-clipper right ">
+          <div class="circle "></div>
+        </div>
+      </div>
+    </div>
+  </div>
+        <div *ngIf="lineChartData" style=" padding-left: 10px; margin-left: -15px;" class="card-content">
         <div class="row valign-wrapper">
           <div class="col l12"  style="width: 100%">
             
-            <canvas baseChart  height="300"
+            <canvas baseChart  height="510"
                 [datasets]="lineChartData"
                 [labels]="lineChartLabels"
                 [options]="chartOptions"

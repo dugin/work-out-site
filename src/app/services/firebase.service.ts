@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { AdminModel } from './../model/admin';
 import { Observable, Observer } from 'rxjs/Rx';
 import { CorporateModel } from './../model/corporate';
@@ -55,6 +56,15 @@ export class FirebaseService {
     return this.af.database.object('corporate/' + corporateID + '/name');
   }
 
+  getCorporateEmployees(corporateID: string): Observable<any[]> {
+   
+    return   this.af.database.list('corporate/' + corporateID + '/users/')
+    
+
+
+
+  }
+
   createUserWithEmailAndPassword(email: string, password: string) {
 
     return this.firebaseApp.auth().createUserWithEmailAndPassword(email, password)
@@ -100,8 +110,8 @@ export class FirebaseService {
   }
 
   getCoporateEmployeesAmount(corporateID: string) {
-      
-       return this.af.database.object('corporate/' + corporateID + '/numEmployees/')
+
+    return this.af.database.object('corporate/' + corporateID + '/numEmployees/')
   }
 
 
@@ -136,7 +146,7 @@ export class FirebaseService {
     return this.af.database.object('/events/' + eventID)
       .update({ isHappening: isHappening })
       .then(() => {
-         this.af.database.object('corporate/' + corporateID + '/events/' + eventID)
+        this.af.database.object('corporate/' + corporateID + '/events/' + eventID)
           .update({ isHappening: isHappening });
       })
 

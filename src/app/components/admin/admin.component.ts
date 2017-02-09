@@ -2,7 +2,8 @@ import { UserModel } from './../../model/user';
 import { FirebaseService } from './../../services/firebase.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
-
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class AdminComponent implements OnInit {
 
   constructor(
     public firebaseService: FirebaseService
-  ) { }
+  ) { 
+     moment.locale('pt-BR');
+  }
 
   openModal() {
     this.modalActions.emit({ action: "modal", params: ['open'] });
@@ -46,6 +49,24 @@ export class AdminComponent implements OnInit {
 
   }
 
+   sortEventsByDate() {
+  
+     
+    return this.users.sort((a, b) => {
+
+      let date1 = moment(a.timestamp, "HH:mm D-M-YYYY");
+      let date2 = moment(b.timestamp, "HH:mm D-M-YYYY");
+
+
+      if (date1.isAfter(date2))
+        return 1
+      else if (date1.isSame(date2))
+        return 0
+
+      else -1
+    })
+  }
+
 
 
   getUsers() {
@@ -53,7 +74,6 @@ export class AdminComponent implements OnInit {
     this.firebaseService.getRequestUsers('-KcF-tBV05Gt9bi-j0-_')
       .subscribe((data) => {
 
-        console.log(data);
 
 
         this.users = [];
@@ -76,6 +96,9 @@ export class AdminComponent implements OnInit {
                   this.noData = true;
                 else
                   this.noData = false;
+
+                
+                  this.sortEventsByDate();
 
                 i++;
 
